@@ -4,6 +4,7 @@ import { action } from '@ember/object';
 import UIkit from 'uikit';
 
 export default class LoginButtonComponent extends Component {
+  @service router;
   @service session;
 
   @action
@@ -24,6 +25,10 @@ export default class LoginButtonComponent extends Component {
           this.authenticating = false;
           this.session.errorMessage = error.error || error;
         }
-      );
+      ).finally(() => {
+        if (this.args.redirect) {
+          this.router.transitionTo(this.args.redirect);
+        }
+        });
   }
 }

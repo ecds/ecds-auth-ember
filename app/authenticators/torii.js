@@ -5,10 +5,8 @@ import { getOwner } from '@ember/application';
 export default class ToriiAuthenticator extends Torii {
   @service torii;
 
-
   async authenticate() {
     const { tokenAuthUrl } = getOwner(this).resolveRegistration('config:environment').fauxOAuth;
-    // const tokenExchangeUri = config.torii.providers['github-oauth2'].tokenExchangeUri;
     await super.authenticate(...arguments);
     const response = await fetch(tokenAuthUrl, {
       method: 'GET',

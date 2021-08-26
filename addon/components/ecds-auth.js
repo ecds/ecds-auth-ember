@@ -4,7 +4,8 @@ import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default class EcdsAuthComponent extends Component {
-  @service store
+  @service store;
+  @service session;
 
   models = this.args.modelsToReload || A([]);
 
